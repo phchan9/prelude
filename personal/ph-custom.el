@@ -20,6 +20,9 @@ at right"
 ;; set global keybinding
 (global-set-key (kbd "C-c 1") 'ph-open-my-custom-file)
 
+;; set rainbow mode to css hook
+(add-hook 'css-mode-hook 'rainbow-mode)
+
 (provide 'ph-custom)
 ;;; ph-custom.el ends here
 
