@@ -23,6 +23,9 @@ at right"
 ;; set rainbow mode to css hook
 (add-hook 'css-mode-hook 'rainbow-mode)
 
+;; start emacs server
+(server-start)
+
 (provide 'ph-custom)
 ;;; ph-custom.el ends here
 
