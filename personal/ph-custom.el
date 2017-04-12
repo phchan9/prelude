@@ -23,6 +23,15 @@ at right"
 ;; set rainbow mode to css hook
 (add-hook 'css-mode-hook 'rainbow-mode)
 
+;; set linum mode
+(global-linum-mode 1)
+
+;; set visual line mode
+(global-visual-line-mode 1)
+
+;; set auto pair
+(electric-pair-mode 1)
+
 ;; start emacs server
 (server-start)
 
