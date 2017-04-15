@@ -1,5 +1,5 @@
 ;; set font size and font type
-(set-default-font "Monospace 15")
+(set-frame-font "Monospace 16")
 
 ;; set key binding to open this my-custom file
 (defvar ph-custom-dir (expand-file-name "personal" (file-name-directory user-init-file))
@@ -9,8 +9,8 @@
   "This file is phchang's personal customization file.")
 
 (defun ph-open-my-custom-file ()
-  "Edit the `ph-custom-file`, in another window. If there is 
-is only one visible window, it will split another one window 
+  "Edit the `ph-custom-file`, in another window. If there is
+is only one visible window, it will split another one window
 at right"
   (interactive)
   (if (= (count-windows) 1)
@@ -37,4 +37,3 @@ at right"
 
 (provide 'ph-custom)
 ;;; ph-custom.el ends here
-
