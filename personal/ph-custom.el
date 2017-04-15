@@ -19,6 +19,7 @@ at right"
 
 ;; set global keybinding
 (global-set-key (kbd "C-c 1") 'ph-open-my-custom-file)
+(global-set-key (kbd "C-c C-f 1") 'toggle-frame-fullscreen)
 
 ;; set rainbow mode to css hook
 (add-hook 'css-mode-hook 'rainbow-mode)
@@ -34,6 +35,24 @@ at right"
 
 ;; start emacs server
 (server-start)
+
+;; js setting for emacs, Reference by http://prak5190.github.io/p/jsemacs/
+(require 'auto-complete)
+; do default config for auto-complete
+(require 'auto-complete-config)
+(ac-config-default)
+;; start yasnippet with emacs
+(require 'yasnippet)
+(yas-global-mode 1)
+
+(add-hook 'js2-mode-hook 'ac-js2-mode)
+(add-hook 'js-mode-hook (lambda () (tern-mode t)))
+(eval-after-load 'tern
+  '(progn
+     (require 'tern-auto-complete)
+     (tern-ac-setup)))
+(add-hook 'js2-mode-hook 'tern-mode)
+
 
 (provide 'ph-custom)
 ;;; ph-custom.el ends here
