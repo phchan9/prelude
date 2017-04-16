@@ -1,5 +1,7 @@
 ;; set font size and font type
-(set-frame-font "Monospace 16")
+(if (equal system-type 'darwin)
+    (set-frame-font "Courier 16")
+  (set-frame-font "Monospace 16"))
 
 ;; set key binding to open this my-custom file
 (defvar ph-custom-dir (expand-file-name "personal" (file-name-directory user-init-file))
