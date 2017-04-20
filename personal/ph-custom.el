@@ -3,12 +3,8 @@
     (set-frame-font "Courier 16")
   (set-frame-font "Monospace 16"))
 
-;; set key binding to open this my-custom file
-(defvar ph-custom-dir (expand-file-name "personal" (file-name-directory user-init-file))
-  "This directory is for phchang's customization.")
-
-(defvar ph-custom-file (expand-file-name "ph-custom.el" ph-custom-dir)
-  "This file is phchang's personal customization file.")
+;; Accoring to perlude-custom.el, I can define this variable as a personal usage
+(setq prelude-user-init-file load-file-name)
 
 (defun ph-open-my-custom-file ()
   "Edit the `ph-custom-file`, in another window. If there is
@@ -17,11 +13,13 @@ at right"
   (interactive)
   (if (= (count-windows) 1)
       (split-window-right))
-  (find-file-other-window ph-custom-file))
+  (find-file-other-window prelude-user-init-file))
 
 ;; set global keybinding
 (global-set-key (kbd "C-c 1") 'ph-open-my-custom-file)
-(global-set-key (kbd "C-c C-f 1") 'toggle-frame-fullscreen)
+
+(if (equal system-type 'darwin)
+    (global-set-key (kbd "C-c C-f 1") 'toggle-frame-fullscreen))
 
 ;; set rainbow mode to css hook
 (add-hook 'css-mode-hook 'rainbow-mode)
@@ -34,6 +32,11 @@ at right"
 
 ;; set auto pair
 (electric-pair-mode 1)
+
+;; set neotree keybinding
+(global-set-key (kbd "<f8>") 'neotree-toggle)
+(setq projectile-switch-project-action 'neotree-projectile-action)
+(setq neo-theme 'ascii)
 
 ;; start emacs server
 (server-start)
