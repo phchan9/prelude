@@ -61,7 +61,8 @@ at right"
 (add-hook 'after-init-hook 'global-company-mode)
 (add-hook 'js-mode-hook (lambda () (setq-local company-backends '(company-tern))))
 
-;; add js2-refactor and xref-js2 mode
+;; use this link to configure js2-refactor and xref-js2
+;; https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html
 (require 'js2-refactor)
 (require 'xref-js2)
 
