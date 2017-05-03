@@ -1,3 +1,6 @@
+;; required extra package
+(prelude-require-packages '(neotree))
+
 ;; set font size and font type
 (if (equal system-type 'darwin)
     (set-frame-font "Courier 16")
