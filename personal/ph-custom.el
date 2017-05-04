@@ -1,5 +1,8 @@
 ;; required extra package
-(prelude-require-packages '(neotree js2-refactor ag xref-js2))
+(prelude-require-packages '(neotree js2-refactor ag xref-js2 zerodark-theme))
+
+;; set theme
+(load-theme 'zerodark t)
 
 ;; set font size and font type
 (if (equal system-type 'darwin)
