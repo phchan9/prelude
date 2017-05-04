@@ -1,5 +1,8 @@
 ;; required extra package
-(prelude-require-packages '(neotree js2-refactor ag xref-js2 zerodark-theme))
+(prelude-require-packages '(neotree js2-refactor ag xref-js2
+                                    zerodark-theme tern
+                                    exec-path-from-shell
+                                    company-tern))
 
 ;; set theme
 (load-theme 'zerodark t)
@@ -43,26 +46,22 @@ at right"
 (setq projectile-switch-project-action 'neotree-projectile-action)
 (setq neo-theme 'ascii)
 
-;; js setting for emacs, Reference by http://prak5190.github.io/p/jsemacs/
-;; (require 'auto-complete)
-;; ; do default config for auto-complete
-;; (require 'auto-complete-config)
-;; (ac-config-default)
-;; ;; start yasnippet with emacs
-;; (require 'yasnippet)
-;; (yas-global-mode 1)
+;; set exec-path consist with PATH environment variable
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
-;; (add-hook 'js2-mode-hook 'ac-js2-mode)
-;; (add-hook 'js-mode-hook (lambda () (tern-mode t)))
-;; (eval-after-load 'tern
-;;   '(progn
-;;      (require 'tern-auto-complete)
-;;      (tern-ac-setup)))
-;; (add-hook 'js2-mode-hook 'tern-mode)
-
-
-;; add js2-refactor
+;; set js2 and tern
 (require 'js2-mode)
+(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+(add-hook 'js-mode-hook 'js2-minor-mode)
+(add-hook 'js-mode-hook (lambda () (tern-mode t)))
+(add-hook 'js2-mode-hook #'tern-mode)
+
+;; set up company backend for tern
+(add-hook 'after-init-hook 'global-company-mode)
+(add-hook 'js-mode-hook (lambda () (setq-local company-backends '(company-tern))))
+
+;; add js2-refactor and xref-js2 mode
 (require 'js2-refactor)
 (require 'xref-js2)
 
