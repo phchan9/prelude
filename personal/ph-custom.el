@@ -7,6 +7,10 @@
 ;; set theme
 (load-theme 'zerodark t)
 
+;; disable flycheck mode, (setq prelude-flyspell nil) not work
+;; need to dive it to find the problem
+(global-flycheck-mode 0)
+
 ;; set font size and font type
 (if (equal system-type 'darwin)
     (set-frame-font "Courier 16")
