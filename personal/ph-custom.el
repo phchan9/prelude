@@ -2,7 +2,7 @@
 (prelude-require-packages '(neotree js2-refactor ag xref-js2
                                     zerodark-theme tern
                                     exec-path-from-shell
-                                    company-tern))
+                                    company-tern rjsx-mode))
 
 ;; set theme
 (load-theme 'zerodark t)
@@ -79,6 +79,10 @@ at right"
 (add-hook 'js2-mode-hook (lambda ()
                            (add-hook 'xref-backend-functions
                            #'xref-js2-xref-backend nil t)))
+
+;; rxjs mode for react development
+(add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
 
 ;; start emacs server
 (server-start)
