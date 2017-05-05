@@ -4,19 +4,29 @@
                                     exec-path-from-shell
                                     company-tern rjsx-mode))
 
-;; set theme
-(load-theme 'zerodark t)
-
 ;; disable flycheck mode, (setq prelude-flyspell nil) not work
 ;; need to dive it to find the problem
 (global-flycheck-mode 0)
 
-;; set font size and font type
-(if (equal system-type 'darwin)
-    (set-frame-font "Courier 16")
-  (set-frame-font "Monospace 16"))
+;; set ui properly when start session from daemon
+(defun ph-set-ui-daemon (frame)
+  (select-frame frame)
+  (ph-set-ui))
 
-;; Accoring to perlude-custom.el, I can define this variable as a personal usage
+(defun ph-set-ui ()
+  (if (equal system-type 'darwin)
+      (set-frame-font "Courier 16")
+    (set-frame-font "Monospace 16"))
+  (load-theme 'zerodark t))
+
+;; fix incorrect size of font and colorscheme when open emacsclient
+;; session from emacs-daemon
+(if (daemonp)
+    (add-hook 'after-make-frame-functions 'ph-set-ui-daemon)
+  (ph-set-ui))
+
+;; Accoring to perlude-custom.el, I can define this variable as a
+;; personal usage
 (setq prelude-user-init-file load-file-name)
 
 (defun ph-open-my-custom-file ()
