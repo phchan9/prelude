@@ -1,0 +1,8 @@
+# key: render
+# name: render-function
+# --
+render() {
+    return (
+        $0
+    );
+}
