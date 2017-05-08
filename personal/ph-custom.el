@@ -2,7 +2,8 @@
 (prelude-require-packages '(neotree js2-refactor ag xref-js2
                                     zerodark-theme tern
                                     exec-path-from-shell
-                                    company-tern rjsx-mode))
+                                    company-tern rjsx-mode
+                                    yasnippet))
 
 ;; disable flycheck mode, (setq prelude-flyspell nil) not work
 ;; need to dive it to find the problem
@@ -98,6 +99,14 @@ at right"
 ;; rxjs mode for react development
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
+
+;; enable yasnippet and set personal snippet path
+(defvar ph-personal-snippet-dir (expand-file-name "snippets" prelude-personal-dir)
+  "This directory is for my personal snippets.")
+(require 'yasnippet)
+;; (add-to-list 'yas-snippet-dirs ph-personal-snippet-dir)
+(setq yas-snippet-dirs (append yas-snippet-dirs '(ph-personal-snippet-dir)))
+(yas-global-mode 1)
 
 ;; start emacs server
 (server-start)

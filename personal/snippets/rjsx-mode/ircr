@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name : import React, { Component }  from 'react';
+# key : ircr
+# --
+import React, { Component } from 'react';
