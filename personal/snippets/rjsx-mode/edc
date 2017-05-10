@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: export-default-class
+# key: edc
+# --
+export default class ${1:Name} extends Component {
+
+    render() {
+        return (
+            $0
+        );
+    }
+}
