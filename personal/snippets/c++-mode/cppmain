@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: OJ main template
+# key: cppmain
+# --
+#include <iostream>
+
+using namespace std;
+
+int main() {
+  $0
+  
+  return 0;
+}
