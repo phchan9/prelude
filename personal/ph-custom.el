@@ -114,8 +114,5 @@ at right"
 (setq yas-snippet-dirs (cons ph-personal-snippet-dir (cdr yas-snippet-dirs)))
 (yas-global-mode 1)
 
-;; start emacs server
-(server-start)
-
 (provide 'ph-custom)
 ;;; ph-custom.el ends here
