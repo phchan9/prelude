@@ -64,6 +64,12 @@ at right"
 ;; set flycheck initially
 (add-hook 'after-init-hook 'global-flycheck-mode)
 
+;; use eslint with rjsx-mode for jsx files
+(flycheck-add-mode 'javascript-eslint 'rjsx-mode)
+
+;; set this variable to disable the warning about trailing comma
+(custom-set-variables '(js2-strict-trailing-comma-warning nil))
+
 ;; init company mode globally
 (add-hook 'after-init-hook 'global-company-mode)
 
