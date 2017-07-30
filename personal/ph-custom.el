@@ -64,11 +64,22 @@ at right"
 ;; set flycheck initially
 (add-hook 'after-init-hook 'global-flycheck-mode)
 
-;; use eslint with rjsx-mode for jsx files
-(flycheck-add-mode 'javascript-eslint 'rjsx-mode)
-
 ;; set this variable to disable the warning about trailing comma
 (custom-set-variables '(js2-strict-trailing-comma-warning nil))
+
+;; reference this guy's repo, https://github.com/anmonteiro/dotfiles/blob/master/.emacs.d/customizations/setup-js.el
+;; set the eslint checker to use project-specific eslint
+(defun my/use-eslint-from-node-modules ()
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "node_modules"))
+         (eslint (and root
+                      (expand-file-name "node_modules/eslint/bin/eslint.js"
+                                        root))))
+    (when (and eslint (file-executable-p eslint))
+      (setq-local flycheck-javascript-eslint-executable eslint))))
+
+(add-hook 'flycheck-mode-hook 'my/use-eslint-from-node-modules)
 
 ;; init company mode globally
 (add-hook 'after-init-hook 'global-company-mode)
