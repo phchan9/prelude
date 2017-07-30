@@ -3,7 +3,7 @@
                                     zerodark-theme tern
                                     exec-path-from-shell
                                     company-tern rjsx-mode
-                                    yasnippet))
+                                    yasnippet prettier-js))
 
 ;; set ui properly when start session from daemon
 (defun ph-set-ui-daemon (frame)
@@ -84,6 +84,10 @@ at right"
 ;; init company mode globally
 (add-hook 'after-init-hook 'global-company-mode)
 
+;; use prettier-js to auto format js code
+(add-hook 'js2-mode-hook 'prettier-js-mode)
+(setq prettier-js-args '("--single-quote"))
+
 ;; use this link to configure js2-refactor and xref-js2
 ;; https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html
 (require 'js2-refactor)
@@ -126,7 +130,6 @@ at right"
 ;; enable yasnippet and set personal snippet path
 (defvar ph-personal-snippet-dir (expand-file-name "snippets" prelude-personal-dir)
   "This directory is for my personal snippets.")
-(require 'yasnippet)
 (setq yas-snippet-dirs (cons ph-personal-snippet-dir (cdr yas-snippet-dirs)))
 (yas-global-mode 1)
 
