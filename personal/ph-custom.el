@@ -5,10 +5,6 @@
                                     company-tern rjsx-mode
                                     yasnippet))
 
-;; disable flycheck mode, (setq prelude-flyspell nil) not work
-;; need to dive it to find the problem
-(global-flycheck-mode 0)
-
 ;; set ui properly when start session from daemon
 (defun ph-set-ui-daemon (frame)
   (select-frame frame)
@@ -64,6 +60,9 @@ at right"
 ;; set exec-path consist with PATH environment variable
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
+
+;; set flycheck initially
+(add-hook 'after-init-hook 'global-flycheck-mode)
 
 ;; init company mode globally
 (add-hook 'after-init-hook 'global-company-mode)
