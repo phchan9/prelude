@@ -3,7 +3,8 @@
                                     zerodark-theme tern
                                     exec-path-from-shell
                                     company-tern rjsx-mode
-                                    yasnippet prettier-js))
+                                    yasnippet prettier-js
+                                    flycheck-status-emoji))
 
 ;; set ui properly when start session from daemon
 (defun ph-set-ui-daemon (frame)
@@ -80,13 +81,17 @@ at right"
       (setq-local flycheck-javascript-eslint-executable eslint))))
 
 (add-hook 'flycheck-mode-hook 'my/use-eslint-from-node-modules)
+(add-hook 'flycheck-mode-hook 'flycheck-status-emoji-mode)
+(set-fontset-font t nil "Symbola")
 
 ;; init company mode globally
 (add-hook 'after-init-hook 'global-company-mode)
 
 ;; use prettier-js to auto format js code
-(add-hook 'js2-mode-hook 'prettier-js-mode)
-(setq prettier-js-args '("--single-quote"))
+;; (add-hook 'js2-mode-hook 'prettier-js-mode)
+;; (setq prettier-js-args '(
+;;                          "--single-quote"
+;;                          "--trailing-comma" "es5"))
 
 ;; use this link to configure js2-refactor and xref-js2
 ;; https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html
