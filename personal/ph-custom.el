@@ -4,7 +4,8 @@
                                     exec-path-from-shell
                                     company-tern rjsx-mode
                                     yasnippet prettier-js
-                                    flycheck-status-emoji))
+                                    flycheck-status-emoji
+                                    org-bullets))
 
 ;; set ui properly when start session from daemon
 (defun ph-set-ui-daemon (frame)
@@ -40,6 +41,9 @@ at right"
 
 (if (equal system-type 'darwin)
     (global-set-key (kbd "C-c C-f 1") 'toggle-frame-fullscreen))
+
+;; set org-* mode to org-mode
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 ;; set rainbow mode to css hook
 (add-hook 'css-mode-hook 'rainbow-mode)
