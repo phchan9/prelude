@@ -44,6 +44,19 @@ at right"
 
 ;; set org-* mode to org-mode
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+;; make org mode allow eval of some langs
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (clojure . t)
+   (python . t)
+   (ruby . t)))
+
+;; stop emacs asking for confirmation
+(setq org-confirm-babel-evaluate nil)
+;; set syntax color for code block
+(setq org-src-fontify-natively t)
+
 
 ;; set rainbow mode to css hook
 (add-hook 'css-mode-hook 'rainbow-mode)
