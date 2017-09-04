@@ -57,6 +57,7 @@ at right"
 ;; set syntax color for code block
 (setq org-src-fontify-natively t)
 
+(setq org-log-into-drawer t)
 
 ;; set rainbow mode to css hook
 (add-hook 'css-mode-hook 'rainbow-mode)
