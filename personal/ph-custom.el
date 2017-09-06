@@ -50,7 +50,8 @@ at right"
  '((emacs-lisp . t)
    (clojure . t)
    (python . t)
-   (ruby . t)))
+   (ruby . t)
+   (sh . t)))
 
 ;; stop emacs asking for confirmation
 (setq org-confirm-babel-evaluate nil)
