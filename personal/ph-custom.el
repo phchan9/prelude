@@ -57,8 +57,25 @@ at right"
 (setq org-confirm-babel-evaluate nil)
 ;; set syntax color for code block
 (setq org-src-fontify-natively t)
-
+;; set logbook enable
 (setq org-log-into-drawer t)
+
+;; set gtd configuration for org mode
+(setq org-agenda-files '("~/gtd/learning.org"
+                         "~/gtd/projects.org"
+                         "~/gtd/misc.org"))
+
+(setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w@)" "In-Progress(i@)" "|" "DONE(d)" "CANCELED(c)")))
+
+(setq org-refile-targets '((org-agenda-files :maxlevel . 3) ("~/gtd/someday.org" :maxlevel . 3)))
+
+;; set org capture template
+(global-set-key (kbd "C-c c") 'org-capture)
+
+(setq org-capture-templates '(("l" "learning")
+                              ("lt" "reading with tags" entry (file "~/gtd/misc.org") "* TODO %^{title} %^G\n%U\n- [ ] %?")
+                              ("ll" "reading post" entry (file "~/gtd/misc.org") "* TODO %^{title}\n%U\n - [ ] %?")
+                              ("t" "todo" entry (file "~/gtd/misc.org") "* TODO %^{title} \n%U")))
 
 ;; set rainbow mode to css hook
 (add-hook 'css-mode-hook 'rainbow-mode)
