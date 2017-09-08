@@ -69,8 +69,9 @@ at right"
 
 (setq org-refile-targets '((org-agenda-files :maxlevel . 3) ("~/gtd/someday.org" :maxlevel . 3)))
 
-;; set org capture template
+;; set org capture template, org-agenda
 (global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c a") 'org-agenda)
 
 (setq org-capture-templates '(("l" "learning")
                               ("lt" "reading with tags" entry (file "~/gtd/misc.org") "* TODO %^{title} %^G\n%U\n- [ ] %?")
