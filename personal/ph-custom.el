@@ -65,7 +65,7 @@ at right"
                          "~/gtd/projects.org"
                          "~/gtd/misc.org"))
 
-(setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w@)" "In-Progress(i@)" "|" "DONE(d)" "CANCELED(c)")))
+(setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w@)" "In-Progress(i)" "|" "DONE(d)" "CANCELED(c)")))
 
 (setq org-refile-targets '((org-agenda-files :maxlevel . 3) ("~/gtd/someday.org" :maxlevel . 3)))
 
@@ -88,6 +88,9 @@ at right"
   (let ((browse-url-browser-function 'browse-url-firefox))
     (browse-url url)))
 (setq flymd-browser-open-function 'my-flymd-browser-function)
+
+;; set key binding for flymd-flyit to live preview markdown
+(global-set-key (kbd "C-c m l") 'flymd-flyit)
 
 ;; set rainbow mode to css hook
 (add-hook 'css-mode-hook 'rainbow-mode)
