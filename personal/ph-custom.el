@@ -5,7 +5,7 @@
                                     company-tern rjsx-mode
                                     yasnippet prettier-js
                                     flycheck-status-emoji
-                                    org-bullets))
+                                    org-bullets flymd))
 
 ;; set ui properly when start session from daemon
 (defun ph-set-ui-daemon (frame)
@@ -77,6 +77,17 @@ at right"
                               ("lt" "reading with tags" entry (file "~/gtd/misc.org") "* TODO %^{title} %^G\n%U\n- [ ] %?")
                               ("ll" "reading post" entry (file "~/gtd/misc.org") "* TODO %^{title}\n%U\n - [ ] %?")
                               ("t" "todo" entry (file "~/gtd/misc.org") "* TODO %^{title} \n%U")))
+
+;; enable org markdown exporter by default
+(eval-after-load "org"
+  '(require 'ox-md nil t))
+
+;; solution to make flymd for us live preview markdown with firefox.
+;; Because chrome prevents jquery from loading local files.
+(defun my-flymd-browser-function (url)
+  (let ((browse-url-browser-function 'browse-url-firefox))
+    (browse-url url)))
+(setq flymd-browser-open-function 'my-flymd-browser-function)
 
 ;; set rainbow mode to css hook
 (add-hook 'css-mode-hook 'rainbow-mode)
