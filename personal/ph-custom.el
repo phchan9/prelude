@@ -58,7 +58,7 @@ at right"
 ;; set syntax color for code block
 (setq org-src-fontify-natively t)
 ;; set logbook enable
-(setq org-log-into-drawer t)
+(setq org-log-into-drawer "LOGBOOK")
 
 ;; set gtd configuration for org mode
 (setq org-agenda-files '("~/gtd/learning.org"
