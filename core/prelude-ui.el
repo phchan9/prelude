@@ -1,6 +1,6 @@
 ;;; prelude-ui.el --- Emacs Prelude: UI optimizations and tweaks.
 ;;
-;; Copyright © 2011-2017 Bozhidar Batsov
+;; Copyright © 2011-2018 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -73,12 +73,6 @@
 ;; use zenburn as the default theme
 (when prelude-theme
   (load-theme prelude-theme t))
-
-(require 'smart-mode-line)
-(setq sml/no-confirm-load-theme t)
-;; delegate theming to the currently active theme
-(setq sml/theme nil)
-(add-hook 'after-init-hook #'sml/setup)
 
 ;; show the cursor when moving after big movements in the window
 (require 'beacon)

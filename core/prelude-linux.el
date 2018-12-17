@@ -1,8 +1,8 @@
-;;; prelude-mediawiki.el --- Emacs Prelude: mediawiki editing config
+;;; prelude-linux.el --- Emacs Prelude: linux specific settings.
 ;;
-;; Copyright © 2011-2017 Bozhidar Batsov
+;; Copyright © 2011-2018 Bozhidar Batsov
 ;;
-;; Author: Bozhidar Batsov <bozhidar@batsov.com>
+;; Author: Stanislav Arnaudov <stanislav_ts@avb.bg>
 ;; URL: https://github.com/bbatsov/prelude
 ;; Version: 1.0.0
 ;; Keywords: convenience
@@ -11,7 +11,7 @@
 
 ;;; Commentary:
 
-;; Basic configs for access to WikEmacs and Wikipedia.
+;; Some Linux specific stuff.
 
 ;;; License:
 
@@ -32,16 +32,12 @@
 
 ;;; Code:
 
-(prelude-require-packages '(mediawiki))
+;; On Linux Emacs doesn't use the shell PATH if it's not started from
+;; the shell. Let's fix that:
+(prelude-require-packages '(exec-path-from-shell))
 
-(eval-after-load 'mediawiki
-  '(progn
-     (setq mediawiki-site-alist '(("Wikipedia" "http://en.wikipedia.org/w" "" "" "Main Page")
-                                  ("WikEmacs" "http://wikemacs.org/w/" "" "" "Main Page")))
+(require 'exec-path-from-shell)
+(exec-path-from-shell-initialize)
 
-     ;; Emacs users care more for WikEmacs than Wikipedia :-)
-     (setq mediawiki-site-default "WikEmacs")))
-
-(provide 'prelude-mediawiki)
-
-;;; prelude-mediawiki.el ends here
+(provide 'prelude-linux)
+;;; prelude-linux.el ends here

@@ -1,10 +1,9 @@
 [![License GPL 3][badge-license]](http://www.gnu.org/licenses/gpl-3.0.txt)
-[![Gratipay Team](https://img.shields.io/gratipay/team/prelude.svg?maxAge=2592000)](https://gratipay.com/prelude/)
+[![Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/bbatsov/donate)
+[![Patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://www.patreon.com/bbatsov)
 
 Emacs Prelude
 =============
-
-[![Join the chat at https://gitter.im/bbatsov/prelude](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bbatsov/prelude?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Prelude is an Emacs distribution that aims to enhance the default
 Emacs experience.  Prelude alters a lot of the default settings,
@@ -13,15 +12,18 @@ library to the mix. The final product offers an easy to use Emacs
 configuration for Emacs newcomers and lots of additional power for
 Emacs power users.
 
-Prelude is compatible **ONLY with GNU Emacs 24.4+**. In general you're
+Prelude is compatible **ONLY with GNU Emacs 25.1+**. In general you're
 advised to always run Prelude with the latest Emacs - currently
-**25.2**.
+**26.1**.
 
 You can support the development of Prelude via
-[Salt](https://bountysource.com/teams/prelude) and
-[Gratipay](https://www.gratipay.com/prelude).
+[PayPal](https://www.paypal.me/bbatsov),
+[Salt](https://bountysource.com/teams/prelude),
+[Patreon](https://www.patreon.com/bbatsov) and
+[Liberapay](https://liberapay.com/bbatsov/donate).
 
-[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png)](https://gratipay.com/prelude)
+[![Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/bbatsov/donate)
+[![Patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://www.patreon.com/bbatsov)
 
 **Table of Contents**
 
@@ -44,11 +46,12 @@ You can support the development of Prelude via
     - [Keymap](#keymap)
         - [Global](#global)
         - [Prelude Mode](#prelude-mode)
-        - [OSX modifier keys](#osx-modifier-keys)
+        - [macOS modifier keys](#macos-modifier-keys)
         - [Projectile](#projectile)
         - [Helm](#helm)
         - [Key-chords](#key-chords)
             - [Disabling key-chords](#disabling-key-chords)
+    - [Cheatsheet](#cheatsheet)
 - [Automatic package installation](#automatic-package-installation)
     - [Color Themes](#color-themes)
     - [Personalizing](#personalizing)
@@ -70,7 +73,7 @@ You can support the development of Prelude via
 
 ## Fast Forward
 
-Assuming you're using an Unix-like OS (`*BSD`, `GNU/Linux`, `OS X`, `Solaris`,
+Assuming you're using an Unix-like OS (`*BSD`, `GNU/Linux`, `macOS`, `Solaris`,
 etc), you already have Emacs 24.4+ installed, as well as `git` & `curl` you
 can skip the whole manual and just type in your favorite shell the
 following command:
@@ -101,8 +104,9 @@ Note that the installer will back up any existing `.emacs` file or
 you're doing a manual install make sure you don't have a `.emacs` file
 or back up your existing `.emacs.d` directory manually.
 
-Don't forget to adjust your `prelude-modules.el` file once the installation is done.
-By default most of the modules that ship with Prelude are not loaded.
+Don't forget to adjust your `prelude-modules.el` file in your personal directory
+once the installation is done. By default most of the modules
+that ship with Prelude are not loaded.
 
 ## Installing Emacs
 
@@ -205,7 +209,6 @@ By default most of the modules that ship with Prelude are not loaded. For more i
 (require 'prelude-js)
 ;; (require 'prelude-latex)
 (require 'prelude-lisp)
-;; (require 'prelude-mediawiki)
 (require 'prelude-org)
 (require 'prelude-perl)
 ;; (require 'prelude-python)
@@ -220,8 +223,8 @@ By default most of the modules that ship with Prelude are not loaded. For more i
 You'll need to adjust your `prelude-modules.el` file once the
 installation is done. If you are doing a manual install then you first
 need to copy the `prelude-modules.el` available in the sample
-directory to the root of `path/to/prelude/installation` and then
-adjust that one.
+directory to the `personal` directory under `path/to/prelude/installation`
+and then adjust that one.
 
 After you've uncommented a module you should either restart Emacs or evaluate the module
 `require` expression with <kbd>C-x C-e</kbd>.
@@ -256,7 +259,7 @@ alias vi='emacsclient -t'
 The last two aliases are helpful if you're used to editing files from
 the command line using `vi(m)`.
 
-Also you can open a file with cursor on choosen line:
+You can also open a file with the cursor positioned directly on a specific line:
 
 ```bash
 emacsclient somefile:1234
@@ -342,7 +345,6 @@ Keybinding         | Description
 <kbd>C-c . #</kbd> | Convert integer at point to specified base. Default is 10.
 <kbd>C-c . %</kbd> | Replace integer at point with another specified integer.
 <kbd>C-c . '</kbd> | Perform arithmetic operations on integer at point. User specifies the operator.
-<kbd>Super-g</kbd> | Toggle between God mode and non-God mode
 <kbd>Super-r</kbd> | Recent files
 <kbd>Super-j</kbd> | Join lines
 <kbd>Super-k</kbd> | Kill whole line
@@ -354,52 +356,41 @@ Keybinding         | Description
 **Note**: For various arithmetic operations, the prefix `C-c .` only needs to be pressed once for the first operation.
 For subsequent operations, only the appropriate operations (i.e. `+`, `-`, `*`, `/`... needs to be pressed).
 
-#### OSX modifier keys
+#### macOS modifier keys
 
 Prelude does not mess by default with the standard mapping of `Command` (to `Super`) and `Option` (to `Meta`).
 
-If you want to swap them add this to your personal config:
+If you want to swap them add this to your [personal config](#personalizing):
 
 ```lisp
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 ```
 
-You can also temporarily swap them with `C-c w` (`M-x prelude-swap-meta-and-super`).
+You can also temporarily swap them with `C-c w` (`M-x prelude-swap-meta-and-super`). Note that some emacs distributions (like [emacs-mac](https://bitbucket.org/mituharu/emacs-mac.git) come with `Command` [set](https://bitbucket.org/mituharu/emacs-mac/src/7fdbfba85d543f01b81e997e2b03788c35cb3bfa/src/macterm.c?at=master&fileviewer=file-view-default#macterm.c-6147:6169) to `Meta`.
+
+**Note**: I'd highly recommend to all macOS users to consider
+[remapping Return to
+Control](http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/)
+instead. That's an epic productivity boost and it's not as crazy as it sounds!
 
 #### Projectile
 
-Here's a list of functionality provided by [Projectile](https://github.com/bbatsov/projectile):
+[Projectile](https://github.com/bbatsov/projectile) is one of the essential packages bundled with Prelude.
+It provides an easy way to navigate and switch projects. Take a look at its extensive documentation
+to get a feel for everything you can do with Projectile.
 
-Keybinding         | Description
--------------------|------------------------------------------------------------
-<kbd>C-c p f</kbd> | Display a list of all files in the project. With a prefix argument it will clear the cache first.
-<kbd>C-c p d</kbd> | Display a list of all directories in the project. With a prefix argument it will clear the cache first.
-<kbd>C-c p T</kbd> | Display a list of all test files(specs, features, etc) in the project.
-<kbd>C-c p s g</kbd> | Run grep on the files in the project.
-<kbd>M-- C-c p s g</kbd> | Run grep on `projectile-grep-default-files` in the project.
-<kbd>C-c p b</kbd> | Display a list of all project buffers currently open.
-<kbd>C-c p o</kbd> | Runs `multi-occur` on all project buffers currently open.
-<kbd>C-c p r</kbd> | Runs interactive query-replace on all files in the projects.
-<kbd>C-c p i</kbd> | Invalidates the project cache (if existing).
-<kbd>C-c p R</kbd> | Regenerates the projects `TAGS` file.
-<kbd>C-c p k</kbd> | Kills all project buffers.
-<kbd>C-c p D</kbd> | Opens the root of the project in `dired`.
-<kbd>C-c p e</kbd> | Shows a list of recently visited project files.
-<kbd>C-c p s a</kbd> | Runs `ack` on the project. Requires the presence of `ack-and-a-half`.
-<kbd>C-c p s s</kbd> | Runs `ag` on the project. Requires the presence of `ag.el`.
-<kbd>C-c p a</kbd> | Switch between files with the same name but different extensions.
-<kbd>C-c p c</kbd> | Runs a standard compilation command for your type of project.
-<kbd>C-c p P</kbd> | Runs a standard test command for your type of project.
-<kbd>C-c p z</kbd> | Adds the currently visited to the cache.
-<kbd>C-c p p</kbd> | Display a list of known projects you can switch to.
-
-Prelude adds an extra keymap prefix `S-p` (`S` stands for
-`Super`), so you can use `S-p` instead of `C-c p`.
+Prelude adds an extra keymap prefix `s-p` (`s` stands for
+`Super`) in addition to the standard one `C-c p`. By default on Windows keyboard
+`Super` is mapped to the `Windows` key and on macOS keyboards `Super` is mapped
+to the `Command` key.
 
 If you ever forget any of Projectile's keybindings just do a:
 
-<kbd>C-c p C-h</kbd>
+<kbd>C-c p C-h</kbd> or <kbd>s-p C-h</kbd>
+
+Alternatively you can just press <kbd>s-p</kbd> and wait for a moment
+for `which-key` to kick in and show you the available keybindings.
 
 #### Helm
 
@@ -475,8 +466,32 @@ If you're an `evil-mode` user you'll probably do well to disable `key-chord-mode
 
 #### vim emulation
 
-If you want to use vim inside of emacs enable the `prelude-evil` module which provides
+If you want to use vim keybindings inside of Emacs enable the `prelude-evil` module which provides
 support for `evil-mode`.
+
+### Cheatsheet
+
+Use `C-h k <key>` (`<key>` are the ones listed on the left) or `C-h f <function>` (`<function>` are the ones listed on the right) to see the detailed explanation.
+
+![cheatsheet](/modules/doc/cheatsheet.png)
+
+#### PDF generation
+
+Install [LaTeX](https://www.latex-project.org/get/)
+
+``` bash
+cd modules/doc
+pdflatex prelude-cheatsheet.tex
+```
+
+#### PNG generation
+
+Install [Poppler](https://poppler.freedesktop.org/)
+
+``` bash
+cd modules/doc
+pdftocairo -png -singlefile prelude-cheatsheet.pdf cheatsheet
+```
 
 ## Automatic package installation
 
@@ -502,8 +517,8 @@ for the eyes, that's why I took that "controversial" decision to
 replace it. You can, of course, easily go back to the default (or
 select another theme entirely).
 
-To disable Zenburn just put in your personal config the following
-line:
+To disable Zenburn just put in your [personal config](#personalizing)
+the following line:
 
 ```lisp
 (disable-theme 'zenburn)
@@ -512,12 +527,16 @@ line:
 Or you can use another theme altogether by adding something in `personal/preload` like:
 
 ```lisp
-(setq prelude-theme 'solarized-dark)
+(setq prelude-theme 'tango)
 ```
 
-**P.S.** Solarized is not available by default - you'll have to
-  install it from MELPA first (`M-x package-install RET
-  solarized-theme`).
+**Note** To use a non-built-in theme, like [Solarized](https://github.com/bbatsov/solarized-emacs),
+you'll have to install it from MELPA first by `M-x package-install RET solarized-theme`. Then add
+
+``` lisp
+(setq prelude-theme 'solarized-dark)
+```
+in `personal/preload`.
 
 Finally, if you don't want any theme at all, you can add this to your
 `personal/preload`:
@@ -528,8 +547,35 @@ Finally, if you don't want any theme at all, you can add this to your
 
 ### Personalizing
 
-Fork the official Prelude repo and add your own touch to it. You're advised to avoid changing stuff outside of the
-personal folder to avoid having to deal with git merge conflicts in the future.
+All files you create under the `personal/` directory are yours for
+personalization.  There is no single special personal config file --
+any files you create in the `personal/` directory will be loaded in
+lexicographical order.  The overall loading precedence is:
+
+1.  `personal/preload/*`
+2.  `core/`
+3.  `personal/prelude-modules.el` (or deprecated `prelude-modules.el`)
+4.  `personal/*`
+
+#### Personalization Example
+
+Suppose you want to configure go-mode to autoformat on each save.  You
+can create a file in `personal/`, let's call this one
+`config-go-mode.el` and add the following to it.
+
+``` emacs-lisp
+(add-hook 'go-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'gofmt-before-save)
+            (setq tab-width 2)))
+```
+
+#### Tips
+
+**Fork** (instead of cloning) the official Prelude repo and add your
+own touch to it. You're advised to **avoid changing stuff outside of
+the personal folder** to avoid having to deal with git merge conflicts
+in the future.
 
 If you'd like to add some auto installation of packages in your
 personal config use the following code:
@@ -552,7 +598,7 @@ Prelude, except a few variables like `prelude-dir`, etc (since nothing is yet lo
 
 #### Disabling whitespace-mode
 
-Although `whitespace-mode` is awesome some people might find it too
+Although `whitespace-mode` is awesome, some people might find it too
 intrusive. You can disable it in your
 personal config with the following bit of code:
 
@@ -560,17 +606,17 @@ personal config with the following bit of code:
 (setq prelude-whitespace nil)
 ```
 
-If you like `whitespace-mode` but prefer it to not automatically
+If you like `whitespace-mode`, but prefer it to not automatically
 cleanup your file on save, you can disable that behavior by setting
-prelude-clean-whitespace-on-save to nil in your config file with:
+`prelude-clean-whitespace-on-save` to `nil` in your config file with:
 
 ```lisp
 (setq prelude-clean-whitespace-on-save nil)
 ```
 
-The prelude-clean-whitespace-on-save setting can also be set on a
+The `prelude-clean-whitespace-on-save` setting can also be set on a
 per-file or directory basis by using a file variable or a
-.dir-locals.el file.
+`.dir-locals.el` file.
 
 
 #### Disable flyspell-mode
@@ -602,7 +648,7 @@ will automatically update the installed packages.
 Prelude makes heavy use of the flyspell-mode package for spell
 checking of various things. The proper operation of flyspell depends
 on the presence of the `aspell` program and an `en` dictionary on your
-system. You can install `aspell` and the dictionary on OS X with
+system. You can install `aspell` and the dictionary on macOS with
 `homebrew` like this:
 
 ```bash
@@ -635,14 +681,14 @@ way to use Emacs is by using it the way it was intended to be used (as
 far as navigation is concerned at least).
 
 If you'd like to be take this a step further and disable the arrow key navigation
-completely put this in your personal config:
+completely put this in your [personal config](#personalizing):
 
 ```lisp
 (setq guru-warn-only nil)
 ```
 
 To disable `guru-mode` completely add the following snippet to your
-personal Emacs config:
+[personal config](#personalizing):
 
 ```lisp
 (setq prelude-guru nil)
@@ -652,7 +698,7 @@ personal Emacs config:
 
 Prelude overrides `C-a` to behave as described
 [here](http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/). If
-you don't like that simply add this to your personal config:
+you don't like that simply add this to your [personal config](#personalizing):
 
 ```lisp
 (global-set-key [remap move-beginning-of-line]
@@ -661,8 +707,8 @@ you don't like that simply add this to your personal config:
 
 ### Poor ido matching performance on large datasets
 
-Prelude swaps the default `ido` flex matching with the more powerful
-[ido-flx](https://github.com/lewang/flx).
+Prelude's `ido` module swaps the default `ido` flex matching with the
+more powerful [ido-flx](https://github.com/lewang/flx).
 
 The sorting algorithm `flx` uses is more complex, but yields better results.
 
@@ -682,7 +728,7 @@ You can always disable the improved sorting algorithm all together like this:
 ### Windows compatibility
 
 While everything in Prelude should work fine in Windows, I test it only
-with Linux & OS X, so there are Windows related problems from time to
+with GNU/Linux & macOS, so there might be Windows-specific problems from time to
 time. This situation will probably improve over time.
 
 ## Known issues
@@ -694,9 +740,11 @@ and send me a pull request. :-)
 
 ## Support
 
-Support is available via the Prelude Google Group <emacs-prelude@googlegroups.com>.
+Support is available via several channels:
 
-There's also a Freenode channel you can visit - `#prelude-emacs`.
+* Prelude's Google Group <emacs-prelude@googlegroups.com>
+* Prelude's Freenode channel (`#prelude-emacs`)
+* [Gitter](https://gitter.im/bbatsov/prelude)
 
 ## Contributors
 
